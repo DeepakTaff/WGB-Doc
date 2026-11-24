@@ -1,10 +1,10 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "Wild Game Butcher",
   "colors": {
     "primary": "#16A34A",
-    "light": "#07C983",
+    "light": "#22C55E",
     "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
@@ -14,7 +14,47 @@
         "group": "Getting Started",
         "pages": [
           "index",
-          "quickstart"
+          "quickstart",
+          "architecture"
+        ]
+      },
+      {
+        "group": "Store Setup & Onboarding",
+        "pages": [
+          "onboarding/store-setup",
+          "onboarding/species-catalog",
+          "onboarding/services-and-products",
+          "onboarding/operations-and-roles"
+        ]
+      },
+      {
+        "group": "Order Intake & Creation",
+        "pages": [
+          "workflows/customer-intake",
+          "workflows/order-customization",
+          "workflows/order-review-deposit"
+        ]
+      },
+      {
+        "group": "Shop Floor Operations",
+        "pages": [
+          "workflows/service-processing",
+          "workflows/product-processing",
+          "workflows/packaging-and-storage"
+        ]
+      },
+      {
+        "group": "Invoicing & Fulfillment",
+        "pages": [
+          "workflows/invoicing-and-payments",
+          "workflows/notifications-and-pickup"
+        ]
+      },
+      {
+        "group": "Technical Reference",
+        "pages": [
+          "reference/data-models",
+          "reference/api-endpoints"
         ]
       }
     ],
@@ -24,31 +64,21 @@
           "anchor": "Documentation",
           "href": "https://mintlify.com/docs",
           "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "href": "mailto:support@wildgamebutcher.com"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -61,12 +91,5 @@
       "cursor",
       "vscode"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   }
 }

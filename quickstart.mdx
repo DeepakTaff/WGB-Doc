@@ -1,47 +1,60 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Quickstart guide"
+description: "Get up and running with the Wild Game Butcher platform in minutes."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+Follow this quickstart guide to configure your butcher shop, set up your species catalog, and process your first wild game order.
 
 ## Prerequisites
 
-Before you begin, you must have:
+Before creating orders, complete the initial shop setup:
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+* An active Wild Game Butcher store account.
+* Store business details, logo, and physical address.
+* Your state tax rate and business tax ID.
+* List of wild game species you accept and custom service rates.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
-
-    ```bash
-    npm install your-package
-    ```
+  <Step title="Configure shop profile and branding">
+    Navigate to **My Store Settings** in the dashboard. Upload your shop logo, set your physical address for customer receipts, and enter your sales tax percentages in **Store Tax Details**.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
 
-    ```bash
-    your-cli init
-    ```
+  <Step title="Set up species and compliance flags">
+    Open **Species Settings** > **Species**. Enable the wild game species you handle (such as White-tailed Deer, Elk, or Wild Boar). Configure mandatory compliance flags:
+    * **License Flag**: Requires customer hunting license number during intake.
+    * **Permit Flag**: Requires game harvest permit or tag verification.
+    * **CITES Flag**: Enables federal documentation tracking for regulated species.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
 
-    ```bash
-    your-cli start
-    ```
+  <Step title="Configure services and processing rates">
+    Go to **Species Settings** > **Services** and **Species-Service**. Define your base services:
+    * Standard processing (skinning, hanging, butchering).
+    * Specialty caping and European mount preparation for taxidermists.
+    * Assign per-head, per-pound, or fixed pricing models.
+  </Step>
+
+  <Step title="Define product cuts, add-ons, and packaging">
+    Open **Product Settings** to establish your standard cuts and specialty recipes:
+    * **Products**: Steaks, roasts, burger grind, snack sticks, and summer sausages.
+    * **Add-ons**: High-temp cheddar, jalapeño mix, and pork or beef fat blends.
+    * **Packaging Types**: Vacuum sealing, butcher freezer paper, and bulk packaging.
+  </Step>
+
+  <Step title="Intake a customer and create your first order">
+    Click **New Order** from the top navigation bar. Follow the 6-step intake wizard:
+    1. Search for an existing customer or register a new hunter.
+    2. Enter harvest information, carcass tag, and hanging weight.
+    3. Select services (skinning, caping, aging duration).
+    4. Choose cuts, sausage recipes, and fat blend ratios.
+    5. Select packaging types and pack portion sizes (1 lb, 2 lb, bulk).
+    6. Review the summary, collect an advance deposit, and print the carcass barcode tag.
+  </Step>
+
+  <Step title="Track shop floor processing and fulfillment">
+    Use the **Service Processing** and **Product Processing** queues to advance tasks as your cutting floor completes each operation. Once packaged, the order moves to **Ready to Invoice**, alerts the customer, and prepares for counter pickup.
   </Step>
 </Steps>
 
 <Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
-
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
+  Need to review the complete data flow? Read the [System Architecture](/architecture) overview or deep dive into [Customer Intake](/workflows/customer-intake).
 </Tip>

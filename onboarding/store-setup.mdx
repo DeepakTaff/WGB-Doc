@@ -1,0 +1,63 @@
+---
+title: "Store setup & branding"
+description: "Configure your butcher shop profile, store locations, billing addresses, custom logo, and sales tax settings."
+---
+
+Before processing wild game orders, configure your butcher shop identity and legal billing details in **My Store Settings**.
+
+## Shop identity and branding
+
+Your store logo and business contact details appear across all customer documents, including check-in intake receipts, carcass hanging tags, invoice printouts, and automated email notifications.
+
+### Uploading a shop logo
+1. Navigate to **My Store Settings** > **Store Logo**.
+2. Drag and drop your shop logo into the upload zone or click **Browse File**.
+3. Supported image formats include PNG, JPG, and SVG (maximum size: 5 MB).
+4. Click **Save Logo**.
+
+The platform stores your image in secure cloud storage (`ButcherLogo`) and generates optimized variants for both web display and thermal receipt printing.
+
+## Addresses and contact details
+
+WGB maintains separate physical store and billing addresses:
+
+<Tabs>
+  <Tab title="Store physical address">
+    Enter the physical location where hunters deliver carcasses and collect processed meat packages:
+    * **Street Address**: Physical address line 1 and optional line 2.
+    * **City, State, Postal Code**: Validated against geographic lookup tables (`StatesLU`, `CitiesLU`, `PostalCodesLU`).
+    * **Contact Phone & Email**: Customer-facing support contact numbers displayed on check-in tags.
+
+    Click **Save Store Address** to commit changes.
+  </Tab>
+  <Tab title="Billing address">
+    Set the legal entity address used for your Wild Game Butcher platform software subscription invoices:
+    * **Company Legal Name**: Registered business entity.
+    * **Tax / EIN Number**: Federal employer identification number.
+    * **Billing Address Lines**: Address matching your merchant card on file.
+
+    Click **Save Billing Address** to update your account records.
+  </Tab>
+</Tabs>
+
+## Sales tax configuration
+
+Configure state and municipal sales tax percentages applied to custom processing and retail products:
+
+1. Navigate to **My Store Settings** > **Store Tax Details**.
+2. Enter your jurisdiction's tax configuration:
+   * **State Tax Rate (%)**: Standard percentage applicable to processing services.
+   * **Local / County Tax Rate (%)**: Additional regional surcharges if applicable.
+   * **Tax Exemption Flags**: Configure exemptions for specific agricultural or raw meat categories as permitted by local state law.
+3. Click **Update Tax Settings**.
+
+The tax rates automatically integrate into the [Invoicing Workflow](/workflows/invoicing-and-payments) when compiling line items.
+
+## Subscription plan management
+
+Manage your platform license tier under **App Settings** > **Subscription Details**:
+
+* **View Plans**: Select between Monthly or Annual billing cycles (`BillingCycle` enum).
+* **Promo Code Redemption**: Apply seasonal affiliate or partner discount codes (`verify-promo-code`).
+* **Payment Method Updates**: Update credit card and ACH details securely via Stripe Elements.
+* **Subscription Invoices**: Review historical software billing invoices and download receipts.

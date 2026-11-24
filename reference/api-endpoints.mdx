@@ -1,0 +1,131 @@
+---
+title: "API endpoints & integration"
+description: "Reference guide to backend REST API endpoints, WebSockets events, and background queue workers."
+---
+
+The Wild Game Butcher backend exposes a RESTful JSON API secured with JWT bearer tokens. All requests require standard authentication headers:
+
+```bash
+Authorization: Bearer <jwt_access_token>
+Content-Type: application/json
+```
+
+## Authentication & profile endpoints
+
+Manage user credentials, shop onboarding, and billing profiles:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/auth/register` | Register a new butcher store account |
+| `POST` | `/auth/login` | Authenticate user and receive JWT access token |
+| `POST` | `/auth/forgot-password` | Request password reset token via email |
+| `POST` | `/auth/reset-password` | Set new password with verified token |
+| `POST` | `/profile/logo/create` | Upload butcher shop branding logo (multipart/form-data) |
+| `POST` | `/profile/addresses` | Update physical store and billing addresses |
+| `GET` | `/profile/states` | Fetch list of US states for address validation |
+| `POST` | `/onboarding/taxRates/upsert` | Configure state and municipal sales tax rates |
+
+## Species & catalog configuration
+
+Manage animals, services, cutting profiles, and recipe add-ons:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/species/list` | Fetch active store species with compliance flags |
+| `POST` | `/species/create` | Add species from master catalog to active store list |
+| `GET` | `/onboarding/service/list` | List configured shop services and color codes |
+| `POST` | `/onboarding/service/upsert` | Create or update carcass services (skinning, caping) |
+| `GET` | `/onboarding/product/list` | List cut profiles, grinds, and sausage recipes |
+| `POST` | `/onboarding/product/upsert` | Create or edit products and minimum batch sizes |
+| `GET` | `/onboarding/addOn/list` | Fetch mix-in cheeses, fat supplements, and seasonings |
+| `POST` | `/onboarding/addOn/upsert` | Create or edit recipe add-on ingredients |
+| `GET` | `/onboarding/packageType/list` | List packaging styles (vacuum seal, freezer paper) |
+
+## Order intake & lifecycle endpoints
+
+Core endpoints governing customer intake and shop floor progress:
+
+<CodeGroup>
+```bash Order Masters & Intake
+# Fetch active species, services, cuts, and add-ons for the intake wizard
+GET /butcher/order/masters
+
+# Validate hunter hunting license number and state regulations
+POST /butcher/customer/validateLicense
+Payload: { "customerId": 42, "licenseNumber": "WI-948201", "stateId": 50 }
+
+# Submit new order with carcass inspection and cutting instructions
+POST /butcher/order/create
+Payload: {
+  "customerId": 42,
+  "speciesId": 3,
+  "hangingWeight": 145.5,
+  "licenseNumber": "WI-948201",
+  "advancePayment": 75.00,
+  "services": [{ "serviceId": 1, "rate": 110.00 }],
+  "products": [{ "productId": 4, "packagingTypeId": 2, "addOnIds": [1, 3] }]
+}
+```
+
+```bash Shop Floor Task Execution
+# List carcasses in service queue
+GET /butcher/serviceProcess/list
+
+# Start or complete a carcass service
+POST /butcher/serviceProcess/workflowServiceProcesses
+Payload: { "orderId": 842, "serviceId": 1, "status": 2 }
+
+# Add shop floor operational note to carcass record
+POST /butcher/serviceProcess/note
+Payload: { "orderId": 842, "serviceId": 1, "notes": "Carcass deboned, 62 lbs trim forwarded to grind." }
+
+# Reopen completed service
+POST /butcher/serviceProcess/reopenService
+Payload: { "orderId": 842, "serviceId": 1, "reason": "Cape inspection adjustment" }
+
+# Update product cutting / sausage status and log final net yield
+POST /butcher/productProcess/workflowUpdate
+Payload: { "orderId": 842, "productId": 4, "weight": 24.5, "status": 2 }
+```
+
+```bash Invoicing & Pickup
+# Compile itemized billing ledger and generate invoice
+POST /butcher/invoice/createInvoice
+Payload: { "orderId": 842 }
+
+# Mark invoice as paid via cash or credit card
+POST /butcher/invoice/markAsPaid
+Payload: { "invoiceId": 1204, "paymentMethod": "CARD", "amount": 234.50 }
+
+# Resend SMS / Email pickup notification to hunter
+POST /butcher/invoice/resendNotification
+Payload: { "invoiceId": 1204 }
+
+# Final customer meat handover
+POST /butcher/pickup/markAsPickedUp
+Payload: { "orderId": 842, "customerSignature": "data:image/png;base64,..." }
+```
+</CodeGroup>
+
+## Socket.io real-time hub
+
+The frontend connects to the Socket.io hub (`SocketConfig`) to receive instant operational notifications without polling:
+
+```typescript
+// Client subscription to order updates
+socket.on('order:status_updated', (data: { orderId: number; newStatus: number }) => {
+  // Updates order badges in real-time across shop floor monitors
+});
+
+socket.on('invoice:ready', (data: { orderId: number; customerName: string }) => {
+  // Alerts front counter staff that packaged order is ready for billing
+});
+```
+
+## BullMQ background worker queues
+
+Asynchronous processing and scheduled operations are handled by Redis-backed BullMQ queues:
+
+* `EmailJob`: Formats and delivers transactional emails (intake receipts, order confirmations, and digital invoices).
+* `SmsJob`: Sends SMS text notifications for immediate pickup alerts and grace period warnings.
+* `StorageCostJob`: Nightly recurring cron job that evaluates `productsCompletedDate` across all uncollected orders and appends daily storage fees for orders past the grace period.

@@ -1,0 +1,84 @@
+---
+title: "Services, products & packaging"
+description: "Configure butcher services, cutting profiles, sausage recipes, recipe add-ons, and packaging specifications."
+---
+
+WGB separates processing operations into two distinct stages: **Services** (carcass handling, skinning, caping, aging) and **Products** (steaks, roasts, ground burger, and cured or smoked sausages).
+
+## Service configuration
+
+Services represent labor performed on the whole animal or carcass before final cutting and packaging.
+
+Navigate to **Species Settings** > **Services** to manage your shop's offerings:
+
+### Service parameters
+* **Service Name**: e.g., *Standard Processing*, *Shoulder Mount Caping*, *European Skull Mount*, *Hide Tanning Prep*, *Disposal Fee*.
+* **Service Color**: Assign color-coded badges (`ServiceColorLU`) that appear on hanging tags and shop floor queue monitors for quick visual sorting.
+* **Fee Type**:
+  * **Flat Fee**: Fixed dollar charge per animal regardless of weight.
+  * **Per Pound Fee**: Calculated based on intake hanging weight or boneless trim weight.
+  * **Hourly Fee**: Applied for specialty custom butcher labor.
+* **Estimated Turnaround Days**: Default duration required to complete the service.
+
+<Note>
+  You can soft-delete or restore services at any time. Active orders retain their historical service rates at the time of check-in.
+</Note>
+
+## Products and cut profiles
+
+Products represent consumer cuts and finished meat goods delivered to the customer.
+
+Navigate to **Products Settings** > **Products** to set up available cuts:
+
+<Columns cols={2}>
+  <Card title="Fresh and Primal Cuts" icon="utensils">
+    * Steaks (Backstrap, Tenderloin)
+    * Roasts (Sirloin, Round, Shoulder)
+    * Stew Meat & Fajita Strips
+    * Whole Muscle Jerky
+  </Card>
+  <Card title="Grinds and Specialty Sausages" icon="bacon">
+    * Ground Burger (80/20, 85/15)
+    * Breakfast Sausage Bulk / Links
+    * Summer Sausage (Plain / Garlic)
+    * Snack Sticks & Bratwursts
+  </Card>
+</Columns>
+
+### Product constraints and batch minimums
+To ensure economical smokehouse and grinder runs, set production thresholds under **Products Settings**:
+* **Minimum Batch Weight**: Minimum pounds of boneless meat required to produce a specific sausage variety (e.g., minimum 10 lbs for Jalapeño Cheddar Summer Sausage).
+* **Base Price per Pound**: Added to the final invoice based on yield or recipe weight.
+
+## Recipe add-ons and seasonings
+
+Specialty sausages and premium burger blends require ingredients such as fat trimmings, high-temp cheeses, and custom seasonings.
+
+Configure mix-ins in **Products Settings** > **Addons**:
+
+| Add-on Name | Category | Fee Model | Common Use Cases |
+| :--- | :--- | :--- | :--- |
+| **Pork Trim (Fat Blend)** | Fat Supplement | Per Pound | Added to venison at 20% ratio for juicy burgers |
+| **Beef Suet (Fat Blend)** | Fat Supplement | Per Pound | Traditional flavor blend for lean game cuts |
+| **High-Temp Cheddar** | Mix-in Cheese | Per Pound | Does not melt out during smokehouse cycles |
+| **High-Temp Pepperjack** | Mix-in Cheese | Per Pound | Spicy kick for snack sticks and summer sausage |
+| **Diced Jalapeños** | Seasoning | Per Pound | Summer sausages and smoked brats |
+| **Vacuum Smoke Seasoning** | Cure & Spice | Flat or Per Lb | Specialty jerky and cured meats |
+
+## Packaging types and sizes
+
+Configure packaging styles under **Products Settings** > **Packaging Type** and **Packaging Size**:
+
+<Tabs>
+  <Tab title="Packaging types">
+    * **Vacuum Sealing (Heavy Duty 4 Mil)**: Airtight preservation preventing freezer burn for up to 2-3 years. Charged per package or per pound.
+    * **Butcher Freezer Paper (Wax-Lined Poly)**: Traditional single-wrapped or double-wrapped white freezer paper. Economical option.
+    * **Chub / Ground Meat Bags**: Roll-stock or poly burger bags sealed with hog rings or tape for ground meat.
+  </Tab>
+  <Tab title="Packaging sizes">
+    Define standardized portion quantities available to customers during order intake:
+    * **1 lb Packages**: Ideal for ground meat, steaks (2 per pack), and jerky.
+    * **2 lb Packages**: Family-size portions for ground meat, stew meat, and roasts.
+    * **Bulk Packages**: 5 lb or 10 lb bags for commercial trim or large gatherings.
+  </Tab>
+</Tabs>
